@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://prayudhitya.github.io/cpns/sitemap.xml
