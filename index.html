@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#f4f2ec"><title>Ruang SKD — Simulasi Penuh CPNS</title>
+<style>
+:root{--paper:#f4f2ec;--white:#fffefa;--ink:#172b3c;--muted:#657482;--line:#e3e3dc;--blue:#17486b;--bluebg:#e9f0f4;--orange:#c85e33;--orangebg:#f8ebe4;--green:#30735e;--greenbg:#eaf3ee;--shadow:0 1px 2px #172b3c0a,0 10px 30px #172b3c0b}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 7% 13%,#c85e330b,transparent 23rem),var(--paper);color:var(--ink);font-family:"Aptos","Segoe UI",system-ui,sans-serif}button{font:inherit}a{color:var(--blue);text-underline-offset:3px}.shell{width:min(1120px,calc(100% - 40px));margin:auto}.top{height:72px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #172b3c1a}.brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit}.mark{width:36px;height:36px;border-radius:11px;background:var(--blue);color:white;display:grid;place-items:center;font-weight:800;font-size:11px}.brand strong{font-size:12px;letter-spacing:.12em}.brand small{display:block;color:var(--muted);font-size:10px;margin-top:3px;letter-spacing:.05em}.top small{color:var(--muted)}main{padding:38px 0 60px}.eyebrow{color:var(--orange);font-size:10px;font-weight:800;letter-spacing:.14em;text-transform:uppercase}.hero{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center;padding:18px 0 34px}h1{font:500 clamp(42px,5.5vw,58px)/1 Georgia,serif;letter-spacing:-.045em;margin:18px 0}.lead{font-size:15px;line-height:1.7;color:#536473;max-width:520px}.note{display:flex;gap:9px;color:var(--muted);font-size:11px;line-height:1.55;margin-top:22px}.note i{font-style:normal;border-radius:50%;width:20px;height:20px;flex:0 0 20px;display:grid;place-items:center;background:var(--bluebg);color:var(--blue);font-weight:bold}
+.card{background:var(--white);border:1px solid #172b3c12;border-radius:24px;box-shadow:var(--shadow);padding:25px}.cardtop{display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--muted);font-weight:700}.tag{padding:7px 10px;background:var(--orangebg);color:var(--orange);border-radius:20px;font-size:9px;letter-spacing:.08em}.metrics{display:grid;grid-template-columns:repeat(3,1fr);border-block:1px solid var(--line);padding:18px 0;margin:20px 0}.metric{padding-left:14px;border-left:1px solid var(--line)}.metric:first-child{padding:0;border:0}.metric b{font-size:24px;letter-spacing:-.04em}.metric small{display:block;color:var(--muted);margin-top:5px;font-size:10px}.sections{display:grid;gap:10px;margin-bottom:20px}.section{display:grid;grid-template-columns:34px 1fr auto;align-items:center;gap:10px;font-size:12px}.code{width:32px;height:29px;border-radius:8px;display:grid;place-items:center;color:var(--blue);background:var(--bluebg);font-size:9px;font-weight:850}.section small{color:var(--muted)}.btn{min-height:46px;border:0;border-radius:11px;padding:0 17px;background:var(--blue);color:white;font-size:13px;font-weight:750;cursor:pointer;transition:transform .14s,background .14s}.btn:hover{background:#103a58}.btn:active{transform:scale(.98)}.btn:focus-visible,.answer:focus-visible,.qnav button:focus-visible{outline:3px solid #c85e3378;outline-offset:3px}.primary{width:100%}.secondary{background:var(--bluebg);color:var(--blue)}.secondary:hover{background:#dce8ee}.bottom{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:12px}.panel{border-top:1px solid var(--line);padding:18px 20px;background:#fffefa80}.panel h3{font-size:12px;margin:0 0 8px}.panel p,.quiet{font-size:11px;line-height:1.6;color:var(--muted);margin:0}.quiet{margin-top:25px;color:#84909a}
+.hidden{display:none!important}.examhead{display:flex;justify-content:space-between;align-items:center;margin:0 0 20px}.examhead h2{font:500 28px Georgia,serif;margin:7px 0 0}.examhead small{font-size:10px;color:var(--muted);letter-spacing:.12em;text-transform:uppercase;font-weight:800}.timer{padding:11px 14px;background:var(--white);border-radius:12px;box-shadow:var(--shadow);color:var(--blue);font-variant-numeric:tabular-nums}.timer strong{font-size:18px}.urgent{color:#a84940;background:#fff0eb}.layout{display:grid;grid-template-columns:minmax(0,1fr) 245px;gap:16px}.qcard,.sidecard{background:var(--white);border:1px solid #172b3c12;border-radius:20px;box-shadow:var(--shadow)}.qcard{padding:28px;min-height:470px}.qmeta{display:flex;justify-content:space-between;align-items:center;margin-bottom:22px}.qmeta span{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;font-weight:800}.qmeta b{font-size:9px;color:var(--orange);background:var(--orangebg);padding:7px 9px;border-radius:18px}.question{font-size:19px;line-height:1.55;font-weight:650;margin:0 0 20px}.answers{display:grid;gap:9px}.answer{display:grid;grid-template-columns:28px 1fr;gap:11px;text-align:left;width:100%;background:white;color:var(--ink);border:1px solid var(--line);border-radius:12px;padding:12px;cursor:pointer}.answer:hover{border-color:#9bb4c3}.answer.selected{border-color:var(--blue);background:#f1f6f8;box-shadow:inset 0 0 0 1px var(--blue)}.letter{width:26px;height:26px;display:grid;place-items:center;border:1px solid #d8dedf;border-radius:8px;color:var(--muted);font-size:10px;font-weight:800}.selected .letter{background:var(--blue);color:white}.answertext{font-size:12px;line-height:1.5;padding-top:3px}.examnav{display:flex;justify-content:space-between;align-items:center;margin-top:20px;padding-top:15px;border-top:1px solid var(--line)}.textbtn{border:0;background:none;color:var(--muted);font-size:11px;font-weight:700;min-height:40px;padding:0 10px;cursor:pointer}.textbtn:disabled{opacity:.4}.side{display:grid;gap:13px;align-content:start}.sidecard{padding:16px}.sidehead{display:flex;justify-content:space-between;margin-bottom:13px}.sidehead b{font-size:11px}.sidehead span{font-size:10px;color:var(--muted)}.qnav{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;max-height:225px;overflow-y:auto;padding-right:2px}.qnav button{height:34px;border:1px solid var(--line);border-radius:8px;background:white;color:var(--muted);font-size:10px;font-weight:750;cursor:pointer}.qnav .active{background:var(--blue);border-color:var(--blue);color:white}.qnav .done:not(.active){background:var(--greenbg);color:var(--green);border-color:#d7e9df}.legend{display:flex;gap:13px;color:var(--muted);font-size:9px;margin:12px 0}.legend i{display:inline-block;width:7px;height:7px;border-radius:2px;background:var(--green);margin-right:4px}.legend span:last-child i{background:var(--blue)}.rule{border-top:1px dashed var(--line);margin:9px 0}.track{height:5px;background:#ebece7;border-radius:10px;margin:5px 0 8px}.fill{height:100%;width:0;background:var(--orange);border-radius:10px}.progress{display:flex;justify-content:space-between;color:var(--muted);font-size:9px}.finish{width:100%;margin-top:12px;min-height:40px;font-size:11px}.weights{display:grid;gap:11px}.weight{display:flex;justify-content:space-between;font-size:10px;color:var(--muted)}.weight b{color:var(--ink)}.tip{font-size:10px;line-height:1.5;color:var(--muted);margin:0}
+.resulthead{padding:10px 0 23px}.resulthead h2{font:500 clamp(34px,5vw,48px)/1.05 Georgia,serif;letter-spacing:-.04em;margin:13px 0 8px}.resulthead p{font-size:13px;color:var(--muted)}.scorepanel{display:grid;grid-template-columns:220px 1fr;gap:25px;align-items:center;background:var(--blue);border-radius:23px;padding:25px;color:white}.scoretotal{border-right:1px solid #ffffff33}.scoretotal small{font-size:9px;letter-spacing:.12em;color:#c2d2dc;text-transform:uppercase;font-weight:800}.scoretotal b{display:block;font:500 54px Georgia,serif;margin:8px 0 3px}.scoretotal span{font-size:10px;color:#d2dfe5}.bars{display:grid;gap:14px}.barrow{display:grid;grid-template-columns:42px 1fr 55px;align-items:center;gap:10px;font-size:10px}.barrow>span{color:#d2dfe5;font-weight:bold}.bartrack{height:7px;background:#ffffff29;border-radius:9px;overflow:hidden}.bartrack i{display:block;height:100%;background:#e8a36f;border-radius:9px}.barrow b{text-align:right}.disclaimer{color:var(--muted);font-size:10px;line-height:1.6;margin:15px 0 22px}.reviewhead{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line);padding:15px 0 12px}.reviewhead h3{font-size:14px;margin:0}.reviewhead span{font-size:10px;color:var(--muted)}.reviews{display:grid;gap:9px;margin-top:13px}.review{background:var(--white);border:1px solid #172b3c12;border-radius:12px;padding:14px 16px}.reviewtop{display:flex;justify-content:space-between;color:var(--muted);font-size:9px;text-transform:uppercase;letter-spacing:.1em;font-weight:800;margin-bottom:8px}.reviewtop b{color:var(--blue);letter-spacing:0}.review h4{font-size:12px;line-height:1.5;margin:0 0 7px}.review p{font-size:10px;color:var(--muted);line-height:1.55;margin:4px 0}.review p strong{color:var(--ink)}.explain{border-top:1px solid var(--line);padding-top:8px!important;margin-top:8px!important}.actions{display:flex;justify-content:flex-end;gap:9px;padding:20px 0}.sources{border-top:1px solid var(--line);padding-top:18px}.sources h3{font-size:12px}.sources ul{font-size:10px;color:var(--muted);line-height:1.9;padding-left:18px}
+@media(max-width:800px){.hero{grid-template-columns:1fr;gap:25px}.bottom{grid-template-columns:1fr;gap:4px}.layout{grid-template-columns:1fr}.side{grid-template-columns:1fr 1fr}.sidecard:first-child{grid-column:1/-1}.qcard{min-height:0}}
+@media(max-width:560px){.shell{width:calc(100% - 28px)}main{padding-top:25px}.hero{padding-top:7px}h1{font-size:43px}.lead{font-size:14px}.card{padding:20px}.examhead h2{font-size:24px}.timer{padding:10px}.layout{gap:11px}.qcard{padding:20px 16px}.question{font-size:17px}.answer{padding:11px;gap:8px}.answertext{font-size:11px}.side{grid-template-columns:1fr}.sidecard:first-child{grid-column:auto}.scorepanel{grid-template-columns:1fr;gap:15px;padding:20px}.scoretotal{border-right:0;border-bottom:1px solid #ffffff33;padding-bottom:14px}.scoretotal b{font-size:47px}.actions{flex-direction:column}.actions .btn{width:100%}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+
+@media(max-width:560px){
+ .shell{width:calc(100% - 24px)}
+ .top{gap:8px;min-width:0}
+ .top .brand,.hero>*,.layout>*,.sidecard,.card{min-width:0}
+ .top>small{font-size:9px;text-align:right;line-height:1.35}
+ .hero{gap:22px}
+ h1{font-size:clamp(32px,9.3vw,40px);line-height:1.03}
+ .lead,.note span,.panel p,.quiet,.question,.answertext,.review p,.review h4{overflow-wrap:anywhere}
+ .examhead{flex-wrap:wrap;gap:10px}
+ .examhead>div:first-child{min-width:0;flex:1 1 190px}
+ .examhead h2{font-size:clamp(20px,6vw,24px)}
+ .timer{min-width:max-content;margin-left:auto}
+ .layout{grid-template-columns:minmax(0,1fr)}
+ .qcard{padding:18px 14px}
+ .question{font-size:16px;line-height:1.5}
+ .answer{min-height:48px;grid-template-columns:28px minmax(0,1fr);padding:12px 10px}
+ .answertext{font-size:13px;line-height:1.45}
+ .letter{width:28px;height:28px}
+ .examnav{gap:8px}
+ .examnav .btn{min-height:44px;padding:0 12px;white-space:nowrap}
+ .textbtn{min-height:44px;padding:0 8px}
+ .side{grid-template-columns:minmax(0,1fr);width:100%}
+ .sidecard:first-child{grid-column:auto}
+ .qnav{grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;max-height:220px}
+ .qnav button{min-width:0;height:44px;font-size:11px}
+ .scorepanel{min-width:0;padding:17px}
+ .scoretotal b{font-size:44px}
+ .barrow{grid-template-columns:40px minmax(0,1fr) 62px;gap:8px}
+ .actions{gap:8px}
+}
+@media(max-width:380px){
+ .shell{width:calc(100% - 20px)}
+ .top{height:60px}
+ .top>small{display:none}
+ .hero{gap:18px}
+ h1{font-size:clamp(30px,9.5vw,36px)}
+ .card{padding:16px}
+ .metrics{margin:15px 0;padding:14px 0}
+ .metric b{font-size:21px}
+ .metric small{font-size:9px}
+ .examhead h2{font-size:20px}
+ .timer{padding:9px 10px}
+ .qcard{padding:16px 12px}
+ .question{font-size:15px}
+ .answertext{font-size:12px}
+ .review{padding:12px}
+}
+</style></head><body><div class="shell">
+<header class="top"><a class="brand" href="#"><span class="mark">SKD</span><span><strong>RUANG SKD</strong><small>SIMULASI PENUH CPNS</small></span></a><small>● Format resmi · 2026</small></header>
+<main>
+<section id="welcome"><div class="hero"><div><span class="eyebrow">Persiapan seleksi CPNS</span><h1>Latihan singkat.<br>Kenali kemampuanmu.</h1><p class="lead">Kerjakan satu sesi SKD lengkap dengan jumlah soal, waktu, dan bobot nilai sesuai format resmi 2026. Setelah selesai, kamu akan melihat nilai tiap bagian, pembahasan, dan jawaban yang bisa dipelajari lagi.</p><div class="note"><i>i</i><span>Naskah soal asli tidak dipublikasikan. Soal latihan ini disusun orisinal dari kompetensi resmi, sehingga formatnya penuh tetapi bukan naskah asli. KemenPANRB menyatakan naskah SKD dijaga kerahasiaannya.</span></div></div>
+<div class="card"><div class="cardtop"><span>Ringkasan sesi</span><span class="tag">FORMAT PENUH</span></div><div class="metrics"><div class="metric"><b>110</b><small>soal</small></div><div class="metric"><b>100</b><small>menit</small></div><div class="metric"><b>550</b><small>skor maksimum</small></div></div><div class="sections"><div class="section"><span class="code">TWK</span><b>Wawasan Kebangsaan</b><small>30 soal</small></div><div class="section"><span class="code">TIU</span><b>Intelegensia Umum</b><small>35 soal</small></div><div class="section"><span class="code">TKP</span><b>Karakteristik Pribadi</b><small>45 soal</small></div></div><button id="start" class="btn primary">Mulai simulasi　→</button></div></div>
+<div class="bottom"><div class="panel"><h3>Pola skor mengikuti SKD 2026</h3><p>TWK dan TIU bernilai 5 untuk jawaban benar, 0 untuk salah atau kosong. TKP bernilai 1–5 sesuai pilihan. Ambang batas umum 2026: TWK 65, TIU 80, TKP 166. Jenis kebutuhan khusus memiliki ketentuan berbeda.</p></div><div class="panel"><h3>Ingin mencoba CAT resmi?</h3><p>BKN menyediakan aplikasi simulasi CAT dengan soal contoh. Aksesnya mungkin memerlukan pendaftaran akun.</p><a href="https://cat.bkn.go.id/simulasi" target="_blank" rel="noreferrer">Buka Simulasi CAT BKN ↗</a></div></div><p class="quiet">Acuan: KepmenPANRB No. 674 Tahun 2026 serta acuan SKD 2024. Periksa pengumuman SSCASN/BKN untuk ketentuan seleksi yang kamu ikuti.</p></section>
+<section id="exam" class="hidden"><div class="examhead"><div><small>SKD CPNS · 110 soal</small><h2>Kerjakan dengan tenang.</h2></div><div id="timer" class="timer"><strong id="time">100:00</strong></div></div><div class="layout"><article class="qcard"><div class="qmeta"><span id="type"></span><b id="number"></b></div><h3 id="question" class="question"></h3><div id="answers" class="answers"></div><div class="examnav"><button id="prev" class="textbtn">← Sebelumnya</button><button id="next" class="btn">Selanjutnya →</button></div></article><aside class="side"><div class="sidecard"><div class="sidehead"><b>Lembar jawaban</b><span id="answered">0 / 110 terisi</span></div><div id="qnav" class="qnav"></div><div class="legend"><span><i></i>Terisi</span><span><i></i>Aktif</span></div><div class="rule"></div><div class="sidehead"><b>Progres</b><span id="percent">0%</span></div><div class="track"><div id="fill" class="fill"></div></div><div class="progress"><span id="progress">0 soal terjawab</span><span>110 soal</span></div><button id="finish" class="btn secondary finish">Selesaikan sesi</button></div><div class="sidecard"><div class="sidehead"><b>Bobot nilai</b><span>per soal</span></div><div class="weights"><div class="weight"><span>TWK</span><b>0 atau 5 poin</b></div><div class="weight"><span>TIU</span><b>0 atau 5 poin</b></div><div class="weight"><span>TKP</span><b>1–5 poin</b></div></div><div class="rule"></div><p class="tip">Pilih satu jawaban terbaik. Kamu bisa pindah soal kapan saja sebelum mengakhiri sesi.</p></div></aside></div></section>
+<section id="results" class="hidden"><div class="resulthead"><span class="eyebrow">Sesi selesai</span><h2 id="headline">Hasil latihanmu.</h2><p id="sub"></p></div><div class="scorepanel"><div class="scoretotal"><small>Skor latihan</small><b id="total">0</b><span>dari 550 poin</span></div><div id="bars" class="bars"></div></div><p class="disclaimer">Format dan pembobotan mengikuti aturan SKD 2026. Soal latihan dalam berkas ini orisinal, bukan naskah resmi CAT. Ambang batas kebutuhan umum 2026: TWK 65, TIU 80, TKP 166; kebutuhan khusus dapat berbeda.</p><div class="reviewhead"><h3>Pembahasan jawaban</h3><span id="summary"></span></div><div id="reviews" class="reviews"></div><div class="actions"><button id="retry" class="btn secondary">Ulangi simulasi</button><button id="sourceToggle" class="btn">Lihat acuan resmi ↗</button></div><div id="sources" class="sources hidden"><h3>Acuan yang dipakai</h3><ul><li><a href="https://jdih.menpan.go.id/dokumen-hukum/keputusan-menteri-pendayagunaan-aparatur-negara-dan-reformasi-birokrasi-nomor-674-tahun-2026-tentang-2140" target="_blank" rel="noreferrer">KepmenPANRB No. 674 Tahun 2026</a> — materi, jumlah soal, durasi, pembobotan, ambang batas.</li><li><a href="https://jdih.menpan.go.id/dokumen-hukum/keputusan-menteri-pendayagunaan-aparatur-negara-dan-reformasi-birokrasi-nomor-321-tahun-2024-tentang-1851" target="_blank" rel="noreferrer">KepmenPANRB No. 321 Tahun 2024</a> — acuan SKD periode sebelumnya.</li><li><a href="https://www.bkn.go.id/peserta-calon-pns-2021-akan-berkompetisi-dalam-100-menit-untuk-menjawab-110-soal-skd-dengan-cat-bkn-berita/" target="_blank" rel="noreferrer">BKN: gambaran materi SKD terdahulu</a> — area kompetensi TWK, TIU, dan TKP.</li><li><a href="https://www.menpan.go.id/posts/soal-seleksi-casn-diserahkan-para-panselnas-kementerian-panrb-jamin-kerahasian-dan-objektivitas" target="_blank" rel="noreferrer">KemenPANRB: naskah soal diserahkan ke Panselnas dan dijaga kerahasiaannya</a>.</li><li><a href="https://cat.bkn.go.id/simulasi/register/syarat_ketentuan" target="_blank" rel="noreferrer">Syarat Simulasi CAT BKN</a> — simulasi resmi menggunakan soal contoh/dummy.</li></ul><p class="quiet">Soal Ruang SKD dibuat orisinal dari topik dan kompetensi pada acuan tersebut. Ini bukan soal resmi BKN atau bocoran ujian.</p></div></section>
+</main></div>
+<script>const Q=[];
+function QItem(section,text,options,answer,why){Q.push([section,text,options.split("|"),answer,why])}
+function T(text,options,why){Q.push(["TKP",text,options,null,why])}
+QItem("TWK","Menurut Pasal 1 ayat (1) UUD 1945, bentuk negara Indonesia adalah ...","Negara kesatuan berbentuk republik|Negara serikat berbentuk republik|Negara kesatuan berbentuk kerajaan|Negara federal berbentuk monarki|Negara serikat berbentuk kerajaan",0,"Pasal 1 ayat (1) UUD 1945 menyatakan Negara Indonesia ialah Negara Kesatuan yang berbentuk Republik.");
+QItem("TWK","Pasal 1 ayat (3) UUD 1945 menegaskan bahwa Indonesia adalah ...","negara hukum|negara federal|negara agama|negara kerajaan|negara serikat",0,"Pasal 1 ayat (3) menyebutkan bahwa Negara Indonesia adalah negara hukum.");
+QItem("TWK","Rumusan Pancasila sebagai dasar negara tercantum dalam ...","Batang tubuh UUD 1945 Pasal 1|Pembukaan UUD 1945 alinea keempat|Dekret Presiden 5 Juli 1959|Piagam Jakarta tanpa perubahan|Penjelasan UUD 1945",1,"Rumusan Pancasila termuat dalam Pembukaan UUD 1945 alinea keempat.");
+QItem("TWK","Menurut Pasal 37 ayat (5) UUD 1945, hal yang tidak dapat diubah adalah ...","sistem pemerintahan presidensial|masa jabatan Presiden|bentuk Negara Kesatuan Republik Indonesia|susunan kementerian negara|jumlah anggota DPR",2,"Pasal 37 ayat (5) UUD 1945 melarang perubahan bentuk NKRI.");
+QItem("TWK","Makna Pasal 27 ayat (1) UUD 1945 adalah ...","setiap warga negara memiliki kedudukan yang sama di dalam hukum dan pemerintahan|setiap warga negara wajib mengikuti pendidikan tinggi|negara menjamin pekerjaan bagi seluruh penduduk|Presiden berhak membentuk undang-undang sendiri|setiap penduduk bebas mengabaikan putusan pengadilan",0,"Pasal 27 ayat (1) menegaskan persamaan kedudukan warga negara di dalam hukum dan pemerintahan.");
+QItem("TWK","Hak dan kewajiban warga negara ikut serta dalam upaya pembelaan negara diatur dalam ...","Pasal 23 ayat (1)|Pasal 27 ayat (3)|Pasal 28A|Pasal 30 ayat (2)|Pasal 34 ayat (2)",1,"Pasal 27 ayat (3) UUD 1945 menyatakan setiap warga negara berhak dan wajib ikut serta dalam upaya pembelaan negara.");
+QItem("TWK","Kebebasan berserikat, berkumpul, dan mengeluarkan pendapat diatur dalam ...","Pasal 28D ayat (1)|Pasal 28E ayat (3)|Pasal 29 ayat (1)|Pasal 30 ayat (1)|Pasal 31 ayat (2)",1,"Pasal 28E ayat (3) menjamin kebebasan berserikat, berkumpul, dan mengeluarkan pendapat.");
+QItem("TWK","Jaminan kemerdekaan tiap penduduk untuk memeluk agama dan beribadat menurut agamanya terdapat pada ...","Pasal 28A|Pasal 28J ayat (1)|Pasal 29 ayat (2)|Pasal 30 ayat (3)|Pasal 32 ayat (1)",2,"Pasal 29 ayat (2) UUD 1945 menjamin kemerdekaan beragama dan beribadat.");
+QItem("TWK","Pasal 30 ayat (1) UUD 1945 mengatur bahwa tiap-tiap warga negara ...","berhak dan wajib ikut serta dalam usaha pertahanan dan keamanan negara|wajib menjadi anggota TNI|berhak menentukan kebijakan pertahanan|wajib mengikuti pendidikan militer dasar|dapat menggantikan tugas pemerintah daerah",0,"Pasal 30 ayat (1) mengatur hak dan kewajiban warga negara dalam usaha pertahanan dan keamanan negara.");
+QItem("TWK","Hak setiap warga negara untuk mendapat pendidikan ditegaskan dalam ...","Pasal 28C ayat (2)|Pasal 30 ayat (1)|Pasal 31 ayat (1)|Pasal 32 ayat (2)|Pasal 34 ayat (3)",2,"Pasal 31 ayat (1) menyatakan setiap warga negara berhak mendapat pendidikan.");
+QItem("TWK","Menurut Pasal 33 ayat (3) UUD 1945, bumi, air, dan kekayaan alam dikuasai oleh negara untuk ...","diberikan kepada perusahaan negara|digunakan sebesar-besarnya bagi kemakmuran rakyat|dikelola hanya oleh pemerintah pusat|diperdagangkan tanpa pengaturan|disimpan sebagai cadangan pemerintah",1,"Sumber daya alam dikuasai negara dan dipergunakan untuk sebesar-besar kemakmuran rakyat.");
+QItem("TWK","Pasal 34 ayat (1) UUD 1945 menyatakan bahwa fakir miskin dan anak-anak terlantar ...","menjadi tanggung jawab keluarga masing-masing saja|dipelihara oleh negara|wajib bekerja bagi negara|dikelola oleh pemerintah desa|tidak termasuk tanggung jawab pemerintah",1,"Pasal 34 ayat (1) menyatakan fakir miskin dan anak-anak terlantar dipelihara oleh negara.");
+QItem("TWK","Bahasa negara Indonesia ditegaskan dalam ...","Pasal 35 UUD 1945|Pasal 36 UUD 1945|Pasal 36A UUD 1945|Pasal 36B UUD 1945|Pasal 37 UUD 1945",1,"Pasal 36 UUD 1945 menetapkan Bahasa Indonesia sebagai bahasa negara.");
+QItem("TWK","Pasal 36A UUD 1945 menyebut lambang negara Garuda Pancasila dengan semboyan ...","Tut Wuri Handayani|Bhinneka Tunggal Ika|Ing Ngarsa Sung Tuladha|Jalesveva Jayamahe|Esa Hilang Dua Terbilang",1,"Pasal 36A menyebut Garuda Pancasila dengan semboyan Bhinneka Tunggal Ika.");
+QItem("TWK","Contoh penerapan sila ketiga Pancasila di tempat kerja adalah ...","mengutamakan kesepakatan untuk menjaga persatuan tim yang beragam|memaksakan pendapat kelompok sendiri|membatasi kerja sama pada orang sedaerah|menghindari kepentingan bersama|mendahulukan kepentingan pribadi",0,"Sila ketiga menekankan persatuan Indonesia dan kepentingan bersama.");
+QItem("TWK","Pengambilan keputusan melalui musyawarah untuk mencapai mufakat paling erat dengan sila ...","pertama|kedua|ketiga|keempat|kelima",3,"Musyawarah dan perwakilan merupakan nilai sila keempat.");
+QItem("TWK","Kebijakan layanan yang memberi akses setara kepada warga sesuai kebutuhan mencerminkan sila ...","pertama|kedua|ketiga|keempat|kelima",4,"Sila kelima memuat nilai keadilan sosial bagi seluruh rakyat Indonesia.");
+QItem("TWK","Sikap yang paling sesuai dengan sila pertama di lingkungan kerja yang beragam adalah ...","menghormati rekan menjalankan ibadah dan tidak memaksakan keyakinan|meminta semua rekan mengikuti ibadah yang sama|menolak bekerja dengan orang berbeda agama|membahas keyakinan pribadi saat melayani warga|membatasi layanan berdasarkan agama",0,"Sila pertama diwujudkan dengan menghormati kebebasan beragama dan beribadat.");
+QItem("TWK","Dalam negara kesatuan, otonomi daerah berarti ...","daerah menjadi negara berdaulat sendiri|pemerintahan daerah menjalankan urusan tertentu dalam kerangka NKRI|pemerintah pusat tidak dapat menetapkan kebijakan nasional|setiap daerah memiliki konstitusi sendiri|hubungan pusat dan daerah bersifat antarnegara",1,"Otonomi daerah memberi kewenangan mengatur urusan tertentu tanpa mengubah bentuk NKRI.");
+QItem("TWK","Contoh bela negara dalam kehidupan sebagai aparatur sipil adalah ...","menjaga integritas, menaati hukum, dan melayani masyarakat dengan baik|mengutamakan kelompok sendiri dalam layanan|menyebarkan informasi yang belum terverifikasi|menolak semua kebijakan pemerintah|menggunakan jabatan untuk kepentingan pribadi",0,"Bela negara dapat diwujudkan melalui pengabdian profesional dan ketaatan pada hukum.");
+QItem("TWK","Seorang pejabat menerima bingkisan dari pihak yang sedang mengurus izin di unitnya. Tindakan paling berintegritas adalah ...","menerima karena nilainya kecil|menolak dan melaporkan sesuai ketentuan gratifikasi|menerima lalu membagikannya kepada rekan|menyimpan sampai proses izin selesai|menerima jika tidak ada yang melihat",1,"Gratifikasi yang terkait jabatan harus ditolak atau dilaporkan sesuai ketentuan.");
+QItem("TWK","Ketika memiliki hubungan keluarga dengan peserta seleksi yang sedang kamu nilai, kamu sebaiknya ...","tetap menilai karena sudah memahami peserta|mengungkap potensi konflik kepentingan dan meminta penanganan sesuai prosedur|meminta peserta mengundurkan diri|memberi nilai lebih rendah agar tampak netral|meminta rekan mengubah hasil tanpa catatan",1,"Konflik kepentingan harus diungkap dan ditangani agar keputusan tetap objektif.");
+QItem("TWK","Penerapan prinsip persamaan dalam pelayanan publik berarti ...","urutan dan standar layanan diterapkan konsisten kepada semua pemohon|pemohon yang dikenal didahulukan|warga dengan pekerjaan tertentu mendapat jalur khusus tanpa dasar|petugas bebas mengubah syarat untuk tiap orang|layanan diberikan hanya kepada warga yang membawa rekomendasi",0,"Pelayanan harus objektif dan tidak membedakan warga tanpa dasar yang sah.");
+QItem("TWK","Makna semboyan Bhinneka Tunggal Ika adalah ...","berbeda-beda tetapi tetap satu|satu suku untuk seluruh Indonesia|perbedaan harus dihapuskan|persatuan hanya berlaku di pusat|kebudayaan daerah tidak perlu dilestarikan",0,"Semboyan tersebut mengakui keberagaman dalam persatuan bangsa.");
+QItem("TWK","Kalimat yang paling efektif untuk surat dinas adalah ...","Kepada para peserta dimohon untuk hadir tepat waktu.|Para peserta dimohon hadir tepat waktu.|Kepada peserta-peserta dimohon agar supaya hadir tepat waktu.|Dimohon kepada para peserta untuk dapat hadir tepat waktu.|Para peserta sekalian dimohon untuk hadir dengan tepat waktu.",1,"Kalimat efektif menghindari kata mubazir seperti kepada, untuk, dapat, atau sekalian secara berlebihan.");
+QItem("TWK","Penulisan kata baku terdapat pada pilihan ...","resiko|aktifitas|memengaruhi|ijin|analisa",2,"Bentuk baku menurut kaidah bahasa Indonesia adalah memengaruhi.");
+QItem("TWK","Kalimat dengan penggunaan tanda baca yang tepat adalah ...","Rapat membahas tiga hal: anggaran, jadwal, dan evaluasi.|Rapat membahas tiga hal; anggaran, jadwal dan evaluasi.|Rapat membahas, tiga hal anggaran jadwal dan evaluasi.|Rapat membahas tiga hal, anggaran: jadwal dan evaluasi.|Rapat membahas tiga hal anggaran; jadwal; dan evaluasi.",0,"Tanda titik dua tepat digunakan sebelum perincian yang didahului pernyataan lengkap.");
+QItem("TWK","Pernyataan yang paling sesuai dengan nasionalisme inklusif adalah ...","mencintai bangsa sendiri sambil menghormati bangsa dan budaya lain|menganggap bangsa sendiri selalu lebih unggul|menolak kerja sama internasional dalam semua keadaan|menghapus identitas budaya daerah|mengutamakan warga dari kelompok mayoritas",0,"Nasionalisme menjaga identitas dan kepentingan bangsa tanpa merendahkan bangsa atau budaya lain.");
+QItem("TWK","Dalam negara demokrasi konstitusional, tindakan pemerintah harus ...","berdasarkan hukum dan dapat dipertanggungjawabkan|mengikuti kehendak pejabat tertinggi tanpa batas|mengabaikan hak warga ketika keputusan mendesak|dilakukan tertutup tanpa pengawasan|menggantikan seluruh fungsi lembaga perwakilan",0,"Demokrasi konstitusional menempatkan kekuasaan dalam batas hukum dan mekanisme akuntabilitas.");
+QItem("TWK","Ketika menemukan informasi provokatif yang berpotensi memecah belah masyarakat, tindakan yang tepat adalah ...","memeriksa sumber dan kebenarannya sebelum menyebarkan atau menanggapi|meneruskan agar masyarakat menilai sendiri|menambahkan komentar emosional|mengirim ke banyak grup untuk meminta pendapat|menganggap semua informasi daring pasti benar",0,"Sikap bertanggung jawab menuntut verifikasi informasi dan mencegah penyebaran hoaks.");
+QItem("TIU","Tentukan angka berikutnya: 4, 7, 10, 13, ...","14|15|16|17|18",2,"Pola bertambah 3, sehingga 13 + 3 = 16.");
+QItem("TIU","Tentukan angka berikutnya: 2, 6, 18, 54, ...","108|126|144|162|216",3,"Setiap suku dikalikan 3, sehingga 54 × 3 = 162.");
+QItem("TIU","Tentukan angka berikutnya: 64, 32, 16, 8, ...","2|3|4|5|6",2,"Setiap suku dibagi 2, sehingga 8 ÷ 2 = 4.");
+QItem("TIU","Tentukan angka berikutnya: 5, 8, 14, 23, 35, ...","47|48|49|50|51",3,"Selisihnya +3, +6, +9, +12; berikutnya +15, sehingga hasilnya 50.");
+QItem("TIU","Tentukan angka berikutnya: 1, 4, 9, 16, 25, ...","30|32|34|36|49",3,"Deret adalah kuadrat bilangan 1 sampai 5; berikutnya 6² = 36.");
+QItem("TIU","Tentukan angka berikutnya: 81, 27, 9, 3, ...","0|1|2|6|9",1,"Setiap suku dibagi 3, sehingga 3 ÷ 3 = 1.");
+QItem("TIU","Tentukan angka berikutnya: 2, 5, 10, 17, 26, ...","35|36|37|38|40",2,"Pola n² + 1: 1²+1, 2²+1, ... berikutnya 6²+1 = 37.");
+QItem("TIU","Tentukan angka berikutnya: 3, 6, 11, 18, 27, ...","36|37|38|39|40",2,"Selisihnya +3, +5, +7, +9, lalu +11; hasil berikutnya 38.");
+QItem("TIU","Tentukan angka berikutnya: 120, 60, 30, 15, ...","5|6|7.5|8|10",2,"Setiap suku dibagi 2, sehingga 15 ÷ 2 = 7,5.");
+QItem("TIU","Tentukan angka berikutnya: 7, 10, 16, 25, 37, ...","49|50|51|52|53",3,"Selisihnya +3, +6, +9, +12; berikutnya +15, sehingga 52.");
+QItem("TIU","Sebuah barang seharga Rp320.000 mendapat potongan 15%. Harga setelah diskon adalah ...","Rp262.000|Rp268.000|Rp272.000|Rp278.000|Rp288.000",2,"Diskon 15% × Rp320.000 = Rp48.000; harga akhir Rp272.000.");
+QItem("TIU","Perbandingan pegawai laki-laki dan perempuan adalah 3 : 5. Jika jumlahnya 64 orang, jumlah pegawai perempuan adalah ...","24|32|36|40|48",3,"Jumlah bagian 8; setiap bagian 64 ÷ 8 = 8. Perempuan 5 × 8 = 40.");
+QItem("TIU","Rata-rata nilai 5 peserta adalah 76. Setelah satu peserta tambahan dengan nilai 88 bergabung, rata-rata baru adalah ...","76|77|78|79|80",2,"Jumlah awal 5 × 76 = 380. Setelah ditambah 88, jumlah 468 dibagi 6 = 78.");
+QItem("TIU","Sebuah pekerjaan selesai dalam 12 hari oleh 5 orang. Dengan produktivitas sama, 10 orang akan menyelesaikannya dalam ...","4 hari|5 hari|6 hari|8 hari|10 hari",2,"Beban 60 orang-hari. Dibagi 10 orang menghasilkan 6 hari.");
+QItem("TIU","Kendaraan menempuh 150 km dalam 2,5 jam. Kecepatan rata-ratanya adalah ...","50 km/jam|55 km/jam|60 km/jam|65 km/jam|75 km/jam",2,"Kecepatan = jarak ÷ waktu = 150 ÷ 2,5 = 60 km/jam.");
+QItem("TIU","Harga 3 buku tulis adalah Rp27.000. Dengan harga satuan yang sama, 8 buku berharga ...","Rp64.000|Rp68.000|Rp70.000|Rp72.000|Rp81.000",3,"Harga satu buku Rp9.000; 8 buku berharga Rp72.000.");
+QItem("TIU","Nilai seorang peserta naik dari 60 menjadi 75. Persentase kenaikannya adalah ...","15%|20%|25%|30%|35%",2,"Kenaikan 15 dari nilai awal 60; 15 ÷ 60 × 100% = 25%.");
+QItem("TIU","Sebuah toko membeli barang Rp180.000 dan menjualnya Rp225.000. Persentase keuntungan terhadap harga beli adalah ...","20%|22,5%|25%|30%|45%",2,"Untung Rp45.000; Rp45.000 ÷ Rp180.000 × 100% = 25%.");
+QItem("TIU","Enam mesin menghasilkan 240 unit dalam 4 jam. Dengan laju sama, 10 mesin dalam 3 jam menghasilkan ...","240 unit|270 unit|300 unit|320 unit|360 unit",2,"Laju per mesin per jam 240 ÷ 24 = 10 unit; 10 mesin selama 3 jam menghasilkan 300 unit.");
+QItem("TIU","Jika 2/3 dari suatu bilangan adalah 48, bilangan tersebut adalah ...","64|68|70|72|76",3,"Bilangan = 48 × 3 ÷ 2 = 72.");
+QItem("TIU","Sebuah bus berangkat pukul 08.35 dan perjalanan berlangsung 2 jam 48 menit. Bus tiba pukul ...","11.13|11.18|11.23|11.28|11.33",2,"08.35 + 2 jam 48 menit = 11.23.");
+QItem("TIU","Pola huruf berikut adalah B, E, I, N, T, ... Huruf selanjutnya ...","X|Y|Z|A|B",3,"Lompatan bertambah +3, +4, +5, +6, lalu +7; setelah T maju tujuh huruf menjadi A.");
+QItem("TIU","Kata yang paling dekat maknanya dengan AKURAT adalah ...","cepat|tepat|ringkas|lengkap|tegas",1,"Akurat berarti teliti atau tepat.");
+QItem("TIU","Lawan kata TEMPORER adalah ...","sementara|singkat|tetap|cepat|berkala",2,"Temporer berarti sementara; lawannya permanen atau tetap.");
+QItem("TIU","KOMPAS : ARAH = TERMOMETER : ...","cuaca|panas|suhu|udara|tekanan",2,"Kompas menunjukkan arah; termometer mengukur suhu.");
+QItem("TIU","DOKTER : PASIEN = GURU : ...","sekolah|buku|murid|kelas|ujian",2,"Dokter memberikan layanan kepada pasien; guru mengajar murid.");
+QItem("TIU","KUNCI : PINTU = KATA SANDI : ...","komputer|akun|layar|jaringan|keyboard",1,"Kunci membuka pintu; kata sandi memberi akses ke akun.");
+QItem("TIU","Semua petugas arsip bekerja teliti. Sebagian ASN adalah petugas arsip. Kesimpulan yang pasti benar adalah ...","semua ASN teliti|sebagian ASN teliti|semua orang teliti adalah ASN|tidak ada ASN yang teliti|sebagian petugas arsip tidak teliti",1,"Sebagian ASN termasuk petugas arsip dan semua petugas arsip teliti.");
+QItem("TIU","Semua laporan yang lengkap dapat diproses. Laporan Rani belum dapat diproses. Kesimpulan logis adalah ...","laporan Rani pasti lengkap|laporan Rani belum lengkap|semua laporan tidak lengkap|Rani tidak mengirim laporan|laporan lengkap tidak diproses",1,"Jika laporan lengkap pasti dapat diproses; karena belum dapat diproses, laporan itu tidak memenuhi syarat lengkap (modus tollens pada hubungan yang diberikan).");
+QItem("TIU","Jika server utama mati, layanan dialihkan ke server cadangan. Server utama mati. Maka ...","layanan pasti berhenti|layanan dialihkan ke server cadangan|server cadangan ikut mati|data pasti hilang|layanan tetap pada server utama",1,"Pernyataan bersyarat langsung diterapkan: server utama mati, maka layanan dialihkan.");
+QItem("TIU","Semua peserta yang lulus administrasi memperoleh kartu ujian. Dika tidak memperoleh kartu ujian. Kesimpulan yang tepat adalah ...","Dika pasti lulus administrasi|Dika tidak lulus administrasi|semua peserta gagal|kartu ujian tidak diperlukan|Dika tidak mendaftar",1,"Berdasarkan aturan yang diberikan, jika lulus administrasi akan mendapat kartu; tidak mendapat kartu berarti tidak lulus administrasi.");
+QItem("TIU","Lima berkas P, Q, R, S, T disusun berurutan. P sebelum R, S setelah Q, dan T paling akhir. Susunan yang memenuhi adalah ...","P-Q-R-S-T|Q-S-P-R-T|R-P-Q-S-T|Q-P-S-R-T|S-Q-P-R-T",1,"Q-S-P-R-T memenuhi P sebelum R, S setelah Q, dan T paling akhir.");
+QItem("TIU","Dalam lomba, Nita lebih cepat dari Rudi. Rudi lebih cepat dari Sari. Siapa yang paling lambat?","Nita|Rudi|Sari|Nita dan Rudi|tidak dapat ditentukan",2,"Urutannya Nita, Rudi, lalu Sari; Sari paling lambat.");
+QItem("TIU","Jika setiap angka genap ditambah 3, hasilnya ganjil. Angka 14 adalah genap. Kesimpulan yang benar ...","14 + 3 = 17|14 + 3 = 16|14 - 3 = 11|14 dibagi 3 = 4|tidak dapat ditentukan",0,"Aturan menyatakan angka genap ditambah 3 menjadi ganjil; 14 + 3 = 17.");
+QItem("TIU","Semua anggota tim A memiliki sertifikat. Bima adalah anggota tim A. Maka ...","Bima memiliki sertifikat|Bima pemimpin tim A|semua pemilik sertifikat anggota tim A|Bima bukan anggota tim A|sertifikat Bima sudah kedaluwarsa",0,"Bima termasuk tim A dan seluruh anggota tim A memiliki sertifikat.");
+const bundles=[
+[
+["Mendengarkan keluhan, memeriksa status layanan, lalu menjelaskan langkah dan waktu tindak lanjut dengan tenang.",5],
+["Memeriksa status dan memberi penjelasan singkat tentang prosedur yang berlaku.",4],
+["Meminta warga menunggu sampai petugas lain memiliki waktu.",3],
+["Mengarahkan warga ke meja lain tanpa memastikan penanggung jawabnya.",2],
+["Menjanjikan permohonan selesai hari itu agar warga segera pergi.",1]
+],
+[
+["Mencatat keluhan, memeriksa fakta, menyelesaikan sesuai kewenangan, dan memberi kabar tindak lanjut.",5],
+["Meneruskan keluhan ke atasan dengan informasi lengkap dan tetap memberi respons awal.",4],
+["Mendengarkan keluhan tetapi menunda tindak lanjut sampai diminta lagi.",3],
+["Meminta warga menyampaikan keluhan melalui kanal lain tanpa membantu prosesnya.",2],
+["Membantah warga sebelum memahami masalahnya.",1]
+],
+[
+["Menanyakan kebutuhan komunikasinya, menjelaskan dengan bahasa sederhana, lalu memastikan warga memahami langkah berikutnya.",5],
+["Menggunakan bahasa yang lebih sederhana dan menawarkan bantuan tambahan bila diperlukan.",4],
+["Memberi petunjuk tertulis resmi dan membuka kesempatan bertanya.",3],
+["Mengulang penjelasan yang sama dengan suara lebih keras.",2],
+["Meminta warga datang kembali bersama orang lain tanpa mencoba membantu.",1]
+],
+[
+["Menolak pemberian, menjaga jarak dari keputusan terkait, dan melaporkan sesuai ketentuan.",5],
+["Menolak pemberian dan meminta arahan atasan tentang pencatatan kejadian.",4],
+["Menolak dengan sopan tetapi tidak melaporkan meski aturan mewajibkannya.",3],
+["Menerima sementara dengan niat mengembalikannya setelah urusan selesai.",2],
+["Menerima dan menyimpan pemberian tanpa pelaporan.",1]
+],
+[
+["Menolak pengiriman ke akun pribadi, memakai kanal resmi, dan melaporkan kendala sistem.",5],
+["Menunda pengiriman sampai kanal resmi pulih sambil memberi tahu pihak terkait.",4],
+["Meminta petugas berwenang menangani data melalui sistem kantor.",3],
+["Mengirim data yang disamarkan ke akun pribadi sebagai jalan pintas.",2],
+["Mengunggah data warga ke tautan publik agar mudah diakses.",1]
+],
+[
+["Menyepakati prioritas tim, menawarkan bantuan, dan mengabari koordinator tentang pembagian tugas.",5],
+["Menyelesaikan bagian sendiri lalu mengambil tugas tambahan setelah koordinasi.",4],
+["Mengingatkan rekan soal tenggat dan tetap mengerjakan tugas yang sudah dibagi.",3],
+["Mengambil alih seluruh pekerjaan tanpa berdiskusi dengan tim.",2],
+["Menyalahkan rekan yang tertinggal di hadapan anggota tim lain.",1]
+],
+[
+["Mendengar kedua pihak, memeriksa fakta, memfasilitasi pembicaraan, dan menyepakati tindak lanjut.",5],
+["Mengajak pihak terkait berdiskusi secara tertutup dan meminta arahan bila konflik berlanjut.",4],
+["Menjaga komunikasi kerja tetap profesional sambil menunggu suasana mereda.",3],
+["Mendukung rekan yang lebih dekat tanpa mengecek duduk perkara.",2],
+["Menyebarkan cerita konflik kepada anggota tim lain.",1]
+],
+[
+["Memetakan urgensi dan dampak, menyusun urutan kerja, lalu mengomunikasikan risiko tenggat.",5],
+["Meminta atasan menetapkan prioritas ketika dua tugas penting berbenturan.",4],
+["Mengerjakan tugas sesuai urutan masuk tanpa menilai urgensinya.",3],
+["Memilih tugas yang paling mudah dan menunda sisanya tanpa kabar.",2],
+["Mengabaikan tenggat yang terasa paling sulit.",1]
+],
+[
+["Segera melaporkan kesalahan, memperbaiki dampaknya, memberi tahu pihak terkait, dan mencegah pengulangan.",5],
+["Berkonsultasi dengan atasan lalu memperbaiki kesalahan secara terbuka.",4],
+["Memperbaiki kesalahan yang terlihat tanpa memberi tahu pihak terdampak.",3],
+["Menunggu apakah kesalahan diketahui orang lain.",2],
+["Mengubah catatan agar kesalahan tidak terlacak.",1]
+],
+[
+["Mengumpulkan data kebutuhan, menguji perbaikan kecil, lalu mengusulkan hasilnya melalui jalur resmi.",5],
+["Mendiskusikan ide dengan tim dan meminta persetujuan sebelum uji coba.",4],
+["Menyampaikan saran saat evaluasi rutin.",3],
+["Mengubah alur kerja sendiri tanpa mengabari pihak terkait.",2],
+["Menolak gagasan baru tanpa memeriksa manfaatnya.",1]
+],
+[
+["Mengaktifkan prosedur layanan alternatif, mencatat gangguan, memberi informasi warga, dan menghubungi tim teknis.",5],
+["Memberi tahu warga tentang gangguan dan memperkirakan waktu pembaruan informasi.",4],
+["Menghentikan sementara proses yang terdampak dan melapor kepada atasan.",3],
+["Menggunakan perangkat atau akun pribadi untuk mengakses data kantor.",2],
+["Mengisi data berdasarkan perkiraan agar layanan tampak tetap berjalan.",1]
+],
+[
+["Menghormati perbedaan, menyesuaikan komunikasi, dan menerapkan standar layanan yang sama.",5],
+["Meminta bantuan penerjemah atau petugas pendamping resmi bila diperlukan.",4],
+["Menjelaskan aturan dengan sopan tanpa membedakan warga.",3],
+["Menghindari interaksi karena merasa perbedaan akan menyulitkan.",2],
+["Menolak melayani warga berdasarkan latar belakangnya.",1]
+],
+[
+["Menjaga keselamatan, menyimpan bukti seperlunya, dan melaporkan ancaman kekerasan melalui kanal resmi.",5],
+["Mengingatkan bahwa ajakan kekerasan tidak dapat diterima dan mengabari atasan.",4],
+["Tidak ikut menyebarkan pesan dan mencari arahan dari petugas yang berwenang.",3],
+["Membalas dengan penghinaan di forum yang sama.",2],
+["Menyebarkan ulang konten provokatif untuk memancing reaksi.",1]
+],
+[
+["Menerima masukan, meminta contoh spesifik, menyepakati perbaikan, lalu melaporkan kemajuannya.",5],
+["Mendengarkan masukan dan mendiskusikan target peningkatan dengan atasan.",4],
+["Mencatat masukan untuk dipertimbangkan pada pekerjaan berikutnya.",3],
+["Membela diri tanpa membahas substansi masukan.",2],
+["Mengabaikan masukan karena merasa pengalaman sendiri cukup.",1]
+],
+[
+["Menggunakan aset hanya untuk tugas dinas, mencatat pemakaian, dan melaporkan selisih atau kerusakan.",5],
+["Memastikan izin dan prosedur sebelum memakai sumber daya yang belum jelas.",4],
+["Mengembalikan sisa bahan kerja dan melaporkan pemakaian sesuai kebiasaan unit.",3],
+["Membawa pulang bahan berlebih tanpa meminta izin.",2],
+["Memakai fasilitas kantor untuk kepentingan pribadi.",1]
+]
+];
+function TK(stem,b){Q.push(["TKP",stem,bundles[b],null,"Pilih tindakan yang melayani kepentingan publik, menjaga integritas dan prosedur, serta tetap efektif dan bertanggung jawab."])}
+TK("Warga datang dengan nada tinggi karena antrean bergerak lambat. Apa langkahmu?",0);
+TK("Permohonan warga belum selesai karena ada dokumen yang belum tercatat. Warga meminta kepastian.",0);
+TK("Seorang lansia bingung membaca nomor antrean dan mulai tertinggal dari proses layanan.",0);
+TK("Pemohon mengeluhkan informasi persyaratan di loket berbeda dengan informasi pada situs instansi.",1);
+TK("Warga menyampaikan kritik keras atas layanan yang menurutnya tidak adil.",1);
+TK("Permohonan warga tertunda karena unit lain belum mengirimkan dokumen pendukung.",1);
+TK("Warga tuli datang sendiri dan memerlukan penjelasan mengenai tahapan layanan.",2);
+TK("Pemohon kurang fasih berbahasa Indonesia dan salah memahami syarat administrasi.",2);
+TK("Warga penyandang disabilitas meminta penyesuaian cara penyampaian informasi.",2);
+TK("Pihak yang sedang mengurus izin menawarkan bingkisan menjelang keputusanmu.",3);
+TK("Rekan mengajakmu makan gratis dari penyedia yang akan mengikuti proses pengadaan.",3);
+TK("Kamu diminta menilai berkas kerabat dekat yang melamar pada formasi di unitmu.",3);
+TK("Rekan meminta daftar nomor telepon warga dikirim ke surel pribadinya karena sistem lambat.",4);
+TK("Berkas berisi data kesehatan warga tidak sengaja dikirim ke grup kerja yang terlalu luas.",4);
+TK("Pihak luar meminta salinan basis data agar dapat membantu menyusun laporan cepat.",4);
+TK("Anggota tim kesulitan menuntaskan tugas menjelang batas waktu, sedangkan pekerjaanmu selesai.",5);
+TK("Unit lain meminta bantuan mendadak ketika timmu juga sedang mengejar target.",5);
+TK("Rekan baru belum memahami alur kerja dan beberapa kali meminta bantuan.",5);
+TK("Dua rekan berselisih mengenai pembagian tanggung jawab dan pekerjaan mulai terhenti.",6);
+TK("Dalam rapat, dua unit saling menyalahkan atas keterlambatan satu layanan.",6);
+TK("Rekan menyampaikan kritik tajam terhadap hasil kerjamu di hadapan tim.",6);
+TK("Kamu menerima dua tugas penting dengan batas waktu yang hampir bersamaan.",7);
+TK("Permintaan pimpinan datang mendadak sementara layanan rutin sedang ramai.",7);
+TK("Daftar pekerjaan menumpuk dan kamu perlu menentukan mana yang harus dikerjakan lebih dulu.",7);
+TK("Kamu menemukan kekeliruan pada angka laporan yang sudah dikirim ke pimpinan.",8);
+TK("Kesalahan entri data yang kamu buat sudah memengaruhi proses warga.",8);
+TK("Kamu menyadari ada lampiran penting yang tertinggal dari surat yang telah diteruskan.",8);
+TK("Proses pencatatan berulang kali membuat antrean panjang dan rentan salah.",9);
+TK("Kamu melihat peluang menyederhanakan formulir tanpa mengurangi informasi wajib.",9);
+TK("Tim diminta memberi usulan perbaikan layanan untuk periode berikutnya.",9);
+TK("Aplikasi layanan berhenti berfungsi saat banyak warga sedang menunggu.",10);
+TK("Jaringan kantor putus ketika tim harus menyelesaikan data sebelum tenggat.",10);
+TK("Sistem kembali aktif, tetapi sebagian transaksi selama gangguan belum tersinkron.",10);
+TK("Warga dari kelompok budaya berbeda meminta penjelasan dengan cara komunikasi yang lebih nyaman.",11);
+TK("Rekan membuat candaan yang merendahkan suku tertentu di ruang kerja.",11);
+TK("Pelamar meminta perlakuan khusus karena mengaku berasal dari komunitas mayoritas di daerah itu.",11);
+TK("Di kanal kerja muncul ajakan melakukan kekerasan terhadap kelompok yang berbeda pandangan.",12);
+TK("Kamu menerima pesan yang menyebarkan kebencian dan meminta rekan meneruskannya.",12);
+TK("Rekan menyampaikan dukungan terhadap tindakan kekerasan sebagai cara menyelesaikan perbedaan.",12);
+TK("Atasan memberi umpan balik bahwa hasil kerjamu perlu lebih teliti.",13);
+TK("Perubahan aturan mengharuskanmu mempelajari aplikasi kerja yang belum pernah digunakan.",13);
+TK("Kamu diminta mengerjakan tugas di luar kebiasaan dan belum menguasai langkah teknisnya.",13);
+TK("Kamu melihat perlengkapan kantor dipakai untuk usaha pribadi salah satu pegawai.",14);
+TK("Sisa anggaran kegiatan tidak sesuai dengan catatan pemakaian yang kamu temukan.",14);
+TK("Kamu perlu memakai kendaraan dinas untuk kegiatan yang belum jelas dasar izinnya.",14);
+
+const $=id=>document.getElementById(id),names={TWK:"Wawasan Kebangsaan",TIU:"Intelegensia Umum",TKP:"Karakteristik Pribadi"},max={TWK:150,TIU:175,TKP:225},cut={TWK:65,TIU:80,TKP:166};
+let cur=0,A=Array(Q.length).fill(null),sec=6000,timer;
+function start(){cur=0;A=Array(Q.length).fill(null);sec=6000;$("welcome").classList.add("hidden");$("results").classList.add("hidden");$("exam").classList.remove("hidden");render();tick();clearInterval(timer);timer=setInterval(()=>{sec--;tick();if(sec<=0)finish(false)},1000);scrollTo({top:0,behavior:"smooth"})}
+function tick(){$("time").textContent=String(Math.floor(sec/60)).padStart(2,"0")+":"+String(sec%60).padStart(2,"0");$("timer").classList.toggle("urgent",sec<=300)}
+function render(){const q=Q[cur],tkp=q[0]==="TKP";$("type").textContent=q[0]+" · "+names[q[0]];$("number").textContent="SOAL "+String(cur+1).padStart(3,"0")+" / "+Q.length;$("question").textContent=q[1];$("answers").innerHTML="";q[2].forEach((opt,i)=>{const text=tkp?opt[0]:opt,b=document.createElement("button");b.className="answer"+(A[cur]===i?" selected":"");b.setAttribute("aria-pressed",A[cur]===i?"true":"false");b.innerHTML='<span class="letter">'+String.fromCharCode(65+i)+'</span><span class="answertext"></span>';b.querySelector(".answertext").textContent=text;b.onclick=()=>{A[cur]=i;render();progress()};$("answers").appendChild(b)});$("prev").disabled=cur===0;$("next").textContent=cur===Q.length-1?"Selesaikan ✓":"Selanjutnya →";$("prev").onclick=()=>{if(cur){cur--;render();progress()}};$("next").onclick=()=>cur===Q.length-1?finish(true):(cur++,render(),progress());nav();progress()}
+function nav(){const n=$("qnav");n.innerHTML="";Q.forEach((_,i)=>{const b=document.createElement("button");b.textContent=String(i+1);b.className=(cur===i?"active ":"")+(A[i]!==null?"done":"");b.setAttribute("aria-label","Buka soal "+(i+1)+(A[i]!==null?", sudah dijawab":", belum dijawab"));b.onclick=()=>{cur=i;render();progress()};n.appendChild(b)})}
+function progress(){const n=A.filter(x=>x!==null).length,p=Math.round(n/Q.length*100);$("answered").textContent=n+" / "+Q.length+" terisi";$("percent").textContent=p+"%";$("fill").style.width=p+"%";$("progress").textContent=n+" soal terjawab";nav()}
+function pts(i){const q=Q[i],a=A[i];if(a===null)return 0;return q[0]==="TKP"?q[2][a][1]:(a===q[3]?5:0)}
+function finish(ask){const empty=A.filter(x=>x===null).length;if(ask&&empty&&!confirm("Masih ada "+empty+" soal kosong. Selesaikan dan lihat hasil?"))return;clearInterval(timer);show()}
+function show(){ $("exam").classList.add("hidden");$("results").classList.remove("hidden");const sum={TWK:0,TIU:0,TKP:0},n=A.filter(x=>x!==null).length;Q.forEach((q,i)=>sum[q[0]]+=pts(i));const total=sum.TWK+sum.TIU+sum.TKP,meets=Object.keys(cut).every(k=>sum[k]>=cut[k]);$("total").textContent=total;$("headline").textContent=meets?"Ambang tiap bagian tercapai.":"Terus latih bagian yang belum mencapai ambang."; $("sub").textContent=n+" dari "+Q.length+" soal dijawab. Hasil ini mengacu ambang kebutuhan umum 2026, bukan jaminan peringkat atau kelulusan akhir.";$("summary").textContent=n+" dijawab · "+(Q.length-n)+" kosong";$("bars").innerHTML="";["TWK","TIU","TKP"].forEach(s=>{const row=document.createElement("div");row.className="barrow";row.innerHTML="<span>"+s+'</span><div class="bartrack"><i style="width:'+Math.round(sum[s]/max[s]*100)+'%"></i></div><b>'+sum[s]+" / "+max[s]+"</b>";$("bars").appendChild(row)});$("reviews").innerHTML="";Q.forEach((q,i)=>{const tkp=q[0]==="TKP",a=A[i],best=tkp?q[2].reduce((m,o,j,arr)=>o[1]>arr[m][1]?j:m,0):q[3],chosen=a===null?"Belum dijawab":tkp?q[2][a][0]:q[2][a],bestText=tkp?q[2][best][0]:q[2][best],item=document.createElement("article");item.className="review";item.innerHTML='<div class="reviewtop"><span>'+q[0]+' · SOAL '+String(i+1).padStart(3,"0")+"</span><b>"+pts(i)+' poin</b></div><h4></h4><p><strong>Jawabanmu:</strong> <span class="ch"></span></p><p><strong>Jawaban terbaik:</strong> <span class="best"></span></p><p class="explain"></p>';item.querySelector("h4").textContent=q[1];item.querySelector(".ch").textContent=chosen;item.querySelector(".best").textContent=bestText;item.querySelector(".explain").textContent=q[4];$("reviews").appendChild(item)});scrollTo({top:0,behavior:"smooth"})}
+$("start").onclick=start;$("finish").onclick=()=>finish(true);$("retry").onclick=start;$("sourceToggle").onclick=()=>{$("sources").classList.toggle("hidden");$("sourceToggle").textContent=$("sources").classList.contains("hidden")?"Lihat acuan resmi ↗":"Sembunyikan acuan"};
+document.addEventListener("keydown",e=>{if($("exam").classList.contains("hidden"))return;if(["1","2","3","4","5"].includes(e.key)){const idx=+e.key-1;if(idx<Q[cur][2].length){A[cur]=idx;render();progress()}}else if(e.key==="ArrowRight"&&cur<Q.length-1){cur++;render();progress()}else if(e.key==="ArrowLeft"&&cur>0){cur--;render();progress()}});
+</script></main></div></body></html>
